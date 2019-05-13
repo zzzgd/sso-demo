@@ -34,6 +34,72 @@
 
 
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp${app.server}</artifactId>
+            <version>${cas.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 根据不同的数据库使用不同驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.15</version>
+        </dependency>
+
+        <!--&lt;!&ndash; 若不想找驱动可以直接写下面的依赖即可，其中包括 HSQLDB、Oracle、MYSQL、PostgreSQL、MariaDB、Microsoft SQL Server &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.apereo.cas</groupId>-->
+        <!--<artifactId>cas-server-support-jdbc-drivers</artifactId>-->
+        <!--<version>${cas.version}</version>-->
+        <!--</dependency>-->
+
+        <!--jdbc认证需要添加的，这个是cas的依赖包-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+    </dependencies>
+
+
+
+    <repositories>
+        <repository>
+            <id>sonatype-releases</id>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>shibboleth-releases</id>
+            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+
     <build>
         <plugins>
             <plugin>
@@ -82,66 +148,6 @@
         </plugins>
         <finalName>cas</finalName>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp${app.server}</artifactId>
-            <version>${cas.version}</version>
-            <type>war</type>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- 根据不同的数据库使用不同驱动 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
-        </dependency>
-
-        <!--&lt;!&ndash; 若不想找驱动可以直接写下面的依赖即可，其中包括 HSQLDB、Oracle、MYSQL、PostgreSQL、MariaDB、Microsoft SQL Server &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.apereo.cas</groupId>-->
-        <!--<artifactId>cas-server-support-jdbc-drivers</artifactId>-->
-        <!--<version>${cas.version}</version>-->
-        <!--</dependency>-->
-
-        <!--jdbc认证需要添加的，这个是cas的依赖包-->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-    </dependencies>
-
-
-
-    <repositories>
-        <repository>
-            <id>sonatype-releases</id>
-            <url>http://oss.sonatype.org/content/repositories/releases/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>shibboleth-releases</id>
-            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>

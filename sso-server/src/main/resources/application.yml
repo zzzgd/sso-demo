@@ -60,11 +60,11 @@ server:
   error:
     include-stacktrace: ALWAYS
   ##
-  # 证书配置 如果不用https,enabled为false
+  # 证书配置
   #
   ssl:
     enabled: false
-#    key-password: changeit
+  #    key-password: changeit
 #    key-store: file:/etc/cas/thekeystore
 #    key-store-password: changeit
   use-forward-headers: true
@@ -83,36 +83,11 @@ endpoints:
 ##
 # CAS 身份验证凭证
 #
-#cas:
-#  authn:
-
-    # 写死的静态用户
-    #    accept:
-    #      users: admin::aaa
-#    jdbc:
-#      query[0]:
-#        healthQuery: select 1
-#        dialect: org.hibernate.dialect.MySQLDialect
-#        driverClass: com.mysql.jdbc.Driver
-#        #        fieldDisabled: disabled # 对应数据库字段,1为禁用
-#        fieldExpired: status # 对应数据库字段,1为过期
-#        fieldPassword: password # 对应数据库字段,密码
-#        sql: select * from tbl_user where username=?
-#        url: jdbc:mysql://172.30.220.233/zzzgd?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
-#        user: root
-#        password: zhangguodong1
-#        # 密码加密算法
-#        passwordEncoder:
-#          type: NONE # NONE|DEFAULT|STANDARD|BCRYPT|SCRYPT|PBKDF2|com.example.CustomPasswordEncoder
-#          characterEncoding: UTF-8
-##        encodingAlgorithm: # 算法
-#        # 加盐
-
-
-  tgc:
-    secure: false
-  serviceRegistry:
-    initFromJson: true
+cas:
+  authn:
+    accept:
+      # 静态用户密码
+      users:
 management:
   security:
     sessions: if_required

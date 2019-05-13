@@ -1,79 +1,34 @@
-CAS Overlay Template
-============================
+### cas-server
+cas是一个实现SSO单点登录的框架. 
 
-Generic CAS WAR overlay to exercise the latest versions of CAS. This overlay could be freely used as a starting template for local CAS war overlays. The CAS services management overlay is available [here](https://github.com/apereo/cas-services-management-overlay).
+#### 1.环境:
+- mysql
+- java 1.8+
 
-# Versions
-
-```xml
-<cas.version>5.1.x</cas.version>
+#### 2.密码验证 
+1.可以直接配置中写死
 ```
-
-# Requirements
-* JDK 1.8+
-
-# Configuration
-
-The `etc` directory contains the configuration files and directories that need to be copied to `/etc/cas/config`.
-
-# Build
-
-To see what commands are available to the build script, run:
-
-```bash
-./build.sh help
+##
+# CAS Authentication Credentials
+#
+cas.authn.accept.users=casuser::Mellon
 ```
-
-To package the final web application, run:
-
-```bash
-./build.sh package
+2.可以查询校验数据库明文密码
 ```
-
-To update `SNAPSHOT` versions run:
-
-```bash
-./build.sh package -U
+#默认加密策略，通过encodingAlgorithm来指定算法，默认NONE不加密
+cas.authn.jdbc.query[0].passwordEncoder.type=NONE
 ```
-
-
-## Executable WAR
-
-Run the CAS web application as an executable WAR.
-
-```bash
-./build.sh run
+3.可以查询校验数据库签名密码
 ```
-
-## Spring Boot
-
-Run the CAS web application as an executable WAR via Spring Boot. This is most useful during development and testing.
-
-```bash
-./build.sh bootrun
+cas.authn.jdbc.query[0].passwordEncoder.type=DEFAULT
+cas.authn.jdbc.query[0].passwordEncoder.characterEncoding=UTF-8
+cas.authn.jdbc.query[0].passwordEncoder.encodingAlgorithm=MD5
 ```
-
-### Warning!
-
-Be careful with this method of deployment. `bootRun` is not designed to work with already executable WAR artifacts such that CAS server web application. YMMV. Today, uses of this mode ONLY work when there is **NO OTHER** dependency added to the build script and the `cas-server-webapp` is the only present module. See [this issue](https://github.com/apereo/cas/issues/2334) and [this issue](https://github.com/spring-projects/spring-boot/issues/8320) for more info.
-
-
-## Spring Boot App Server Selection
-There is an app.server property in the pom.xml that can be used to select a spring boot application server.
-It defaults to "-tomcat" but "-jetty" and "-undertow" are supported. 
-It can also be set to an empty value (nothing) if you want to deploy CAS to an external application server of your choice and you don't want the spring boot libraries included. 
-
-```xml
-<app.server>-tomcat<app.server>
+4.可以查询校验数据库加密密码(各种hash算法和base64编码,以及16进制处理,只知道验证过程,要还原出加密过程比较复杂)
 ```
-
-## Windows Build
-If you are building on windows, try build.cmd instead of build.sh. Arguments are similar but for usage, run:  
-
+cas.authn.jdbc.encode[0].passwordEncoder.type=DEFAULT
+cas.authn.jdbc.encode[0].passwordEncoder.characterEncoding=UTF-8
+#MD5加密策略
+cas.authn.jdbc.encode[0].passwordEncoder.encodingAlgorithm=MD5
+cas.authn.jdbc.encode[0].passwordEncoder.secret=
 ```
-build.cmd help
-```
-
-## External
-
-Deploy resultant `target/cas.war`  to a servlet container of choice.
