@@ -32,3 +32,5 @@ cas.authn.jdbc.encode[0].passwordEncoder.characterEncoding=UTF-8
 cas.authn.jdbc.encode[0].passwordEncoder.encodingAlgorithm=MD5
 cas.authn.jdbc.encode[0].passwordEncoder.secret=
 ```
+5.还支持rest校验密码,也就是通过接口调用获取用户的密码来校验  
+6.
